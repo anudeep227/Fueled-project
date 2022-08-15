@@ -1,0 +1,6 @@
+apiVersion: v2
+name: fueled-backend
+description: A Helm chart for fueled deployment
+type: application
+version: 0.1.0
+appVersion: 1.0.1

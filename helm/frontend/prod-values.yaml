@@ -1,0 +1,16 @@
+model:
+  name: fueled-frontend
+  BaseUrl: fueled-backend-service
+  imageRepoUrl: 340032756889.dkr.ecr.us-east-1.amazonaws.com
+  imageRepoName: fueld-frontend
+  domain: web.fueled.com
+  imageTag: latest
+  replica: 1
+  maxSurge: 1
+  maxUnavailable: 1
+  minReadySeconds: 30
+  port: 3000
+  imagePullSecrets: aws-ecr
+  env:
+    imagePullPolicy: IfNotPresent
+    

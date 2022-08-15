@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.model.name }}-deployment
+spec:
+  replicas: {{ .Values.model.replicacount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.model.name }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: {{ .Values.model.maxSurge }}
+      maxUnavailable: {{ .Values.model.maxUnavailable }}
+  minReadySeconds: {{ .Values.model.minReadySeconds }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.model.name }}
+      annotations:
+        timestamp: "{{ now | date "20060102150405" }}"
+    spec:
+      containers:
+        - name: nodongo
+          image: {{ .Values.model.imageRepoUrl }}/{{ .Values.model.imageRepoName }}:{{.Values.model.imageTag}}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: {{ .Values.model.port }}
+          env:
+          - name: SPRING_PROFILES_ACTIVE
+            value: {{ .Values.model.profile }}
+      imagePullSecrets:
+        - name: {{ .Values.model.imagePullSecrets }}

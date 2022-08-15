@@ -1,0 +1,6 @@
+# Default values for cloudwatch.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+ClusterName: "demo"
+Region: "us-east-1"
